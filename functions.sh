@@ -14,7 +14,7 @@ function jv_pg_phs_takePhotoAndOpenIt() {
 }
 
 function jv_pg_phs_printPhoto() {
-    lpr -lhm -P ${jv_pg_phs_printer} $(jv_pg_phs_getLastPhoto)
+    lpr -P ${jv_pg_phs_printer} $(jv_pg_phs_getLastPhoto)
 
     if [[ $? -eq 0 ]]; then
         say "$(jv_pg_phs_i18n PRINT_OK)"; return 0
