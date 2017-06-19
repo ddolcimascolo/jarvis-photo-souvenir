@@ -1,1 +1,4 @@
-*PREND*PHOTO*==jv_pg_phs_takePictureAndOpenIt
+*PREND*PHOTO*==jv_pg_phs_takePhotoAndOpenIt
+*AFFICHE*PHOTO*==jv_pg_phs_showPhoto
+*FERME*PHOTO*|*ANNULE*PHOTO*==jv_pg_phs_closePhoto
+*IMPRIME*PHOTO*==jv_pg_phs_printPhoto
