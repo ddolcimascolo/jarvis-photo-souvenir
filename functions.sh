@@ -1,8 +1,15 @@
 #!/bin/bash
-# Here you can create functions which will be available from the commands file
-# You can also use here user variables defined in your config file
-# To avoid conflicts, name your function like this
-# pg_XX_myfunction () { }
-# pg for PluGin
-# XX is a short code for your plugin, ex: ww for Weather Wunderground
-# You can use translations provided in the language folders functions.sh
+
+function jv_pg_phs_takePictureAndOpenIt() {
+    fswebcam -r ${jv_pg_phs_resolution} --no-banner -S ${jv_pg_phs_skipFrames} --jpeg ${jv_pg_phs_jpegQuality} ${jv_pg_phs_file}
+
+    if [[ $? -eq 0 ]]; then
+        say "$(jv_pg_phs_i18n PHOTO_TAKEN)"
+        chromium-browser --kiosk ${jv_pg_phs_file} &
+        return 0
+    else
+        say "$(jv_pg_phs_i18n PHOTO_FAILED)"
+    fi
+
+    return 1
+}
