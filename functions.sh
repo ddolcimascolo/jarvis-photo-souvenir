@@ -2,7 +2,6 @@
 
 function jv_pg_phs_takePhotoAndOpenIt() {
     jv_pg_phs_newFile
-    jv_pg_phs_closePhoto
 
     fswebcam -q -r ${jv_pg_phs_resolution} --no-banner -S ${jv_pg_phs_skipFrames} --jpeg ${jv_pg_phs_jpegQuality} $(jv_pg_phs_getLastPhoto)
 
@@ -27,15 +26,11 @@ function jv_pg_phs_printPhoto() {
 }
 
 function jv_pg_phs_showPhoto() {
-    chromium-browser --kiosk $(jv_pg_phs_getLastPhoto) > /dev/null 2>&1 & disown
-    echo $! > ${jv_pg_op_browserLockFile}
+    jv_pg_utils_openKioskBrowser "$(jv_pg_phs_getLastPhoto)"
 }
 
 function jv_pg_phs_closePhoto() {
-    if [[ -e ${jv_pg_op_browserLockFile} ]] && kill -0 $(cat ${jv_pg_op_browserLockFile}) > /dev/null 2>&1
-    then
-        kill $(cat ${jv_pg_op_browserLockFile})
-    fi
+    jv_pg_utils_closeBrowser
 }
 
 function jv_pg_phs_getLastPhoto() {
